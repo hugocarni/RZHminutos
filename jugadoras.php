@@ -444,5 +444,8 @@ function mostrarError(texto) {
     setTimeout(() => mensajeError.style.display = 'none', 3000);
 }
 </script>
+ <div class="volver">
+        <a href="index.php" class="btn btn-primary">Volver</a>
+    </div>
 </body>
 </html>

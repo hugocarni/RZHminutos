@@ -8,12 +8,19 @@
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f5f6fa;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
+            padding: 40px 20px;
         }
 
         h1 {
@@ -72,36 +79,44 @@
 </head>
 <body>
 
-<h1>Seleccionar Partido</h1>
+<!-- 🔹 Incluimos el menú -->
+<?php 
+include('menu.php'); 
+?>
 
-<div class="selector">
-    <form action="jugadoras.php" method="GET">
-        <label for="partido">Elige un partido:</label><br><br>
-        <select name="id" id="partido" required>
-            <option value="">-- Selecciona un partido --</option>
-            <?php
-            require_once('conexion.php');
+<!-- 🔹 Contenido principal -->
+<main>
+    <h1>Seleccionar Partido</h1>
 
-            $sql = "SELECT id, rival, fecha FROM partidos ORDER BY fecha ASC";
-            $resultado = $conexion->query($sql);
+    <div class="selector">
+        <form action="jugadoras.php" method="GET">
+            <label for="partido">Elige un partido:</label><br><br>
+            <select name="id" id="partido" required>
+                <option value="">-- Selecciona un partido --</option>
+                <?php
+                require_once('conexion.php');
 
-            if ($resultado->num_rows > 0) {
-                while($fila = $resultado->fetch_assoc()) {
-                    $nombre = htmlspecialchars($fila['rival']);
-                    $fecha = date('d/m/Y', strtotime($fila['fecha']));
-                    echo "<option value='{$fila['id']}'>$nombre - $fecha</option>";
+                $sql = "SELECT id, rival, fecha FROM partidos ORDER BY fecha ASC";
+                $resultado = $conexion->query($sql);
+
+                if ($resultado->num_rows > 0) {
+                    while($fila = $resultado->fetch_assoc()) {
+                        $nombre = htmlspecialchars($fila['rival']);
+                        $fecha = date('d/m/Y', strtotime($fila['fecha']));
+                        echo "<option value='{$fila['id']}'>$nombre - $fecha</option>";
+                    }
+                } else {
+                    echo "<option disabled>No hay partidos registrados</option>";
                 }
-            } else {
-                echo "<option disabled>No hay partidos registrados</option>";
-            }
-            ?>
-        </select>
+                ?>
+            </select>
 
-        <button type="submit">Continuar</button>
-    </form>
+            <button type="submit" style="padding-top: 10px; margin-top: 20px;">Continuar</button>
+        </form>
 
-    <div class="mensaje" id="mensajeError">Debes seleccionar un partido.</div>
-</div>
+        <div class="mensaje" id="mensajeError">Debes seleccionar un partido.</div>
+    </div>
+</main>
 
 <script>
     const form = document.querySelector('form');
