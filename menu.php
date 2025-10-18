@@ -39,7 +39,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="#">RZHminutos</a>
+        <a class="navbar-brand" href="index.php">RZHminutos</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -48,7 +48,7 @@
             <ul class="navbar-nav me-3">
                 <li class="nav-item"><a class="nav-link active" href="index.php">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="estadisticas.php">Estadisticas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href="partidos.php">Partidos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Sobre Nosotros</a></li>
             </ul>
             <!-- <a href="#" class="btn btn-cta">Contáctanos</a> -->
