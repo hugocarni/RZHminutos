@@ -36,24 +36,27 @@
             $resultado = $conexion->query($sql);
 
             if ($resultado->num_rows > 0) {
-                echo '<div class="table-responsive my-3 text-center" style="margin: 0 auto; width: 70%;">
+                echo '<div class="table-responsive my-3 text-center" style="margin: 0 auto; width: 80%;">
                         <table class="table table-striped table-bordered align-middle">
                             <thead class="table-dark">
                                 <tr>
                                     <th>Nombre de la Jugadora</th>
                                     <th>Total de Minutos</th>
                                     <th>% Minutos Jugados</th>
+                                    <th>Promedio Minutos/Partido</th>
                                 </tr>
                             </thead>
                             <tbody>';
                 while ($fila = $resultado->fetch_assoc()) {
                     $total_minutos = (float)$fila['total_minutos'];
                     $porcentaje = ($total_minutos / ($total_partidos * 60)) * 100;
+                    $promedio = $total_minutos / $total_partidos;
                     echo '
                         <tr>
                             <td>' . htmlspecialchars($fila['nombre_jugadora']) . '</td>
                             <td>' . htmlspecialchars($total_minutos) . '</td>
                             <td>' . number_format($porcentaje, 2) . '%</td>
+                            <td>' . number_format($promedio, 2) . '</td>
                         </tr>';
                 }
                 echo '      </tbody>
