@@ -12,181 +12,165 @@ if (!$id_partido) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RZHminutos</title>
- <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f5f6fa;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f5f6fa;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
 
-        h2 {
-            margin-top: 25px;
-            color: #2c3e50;
-            text-align: center;
-        }
+    h2 {
+        margin-top: 25px;
+        color: #2c3e50;
+        text-align: center;
+    }
 
-        #listaJugadoras {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
+    #listaJugadoras {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        margin-top: 20px;
+    }
 
-        .jugadora {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 10px;
-            border-bottom: 1px solid #eee;
-        }
+    .jugadora {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 10px;
+        border-bottom: 1px solid #eee;
+    }
 
-        .jugadora:last-child {
-            border-bottom: none;
-        }
+    .jugadora:last-child {
+        border-bottom: none;
+    }
 
-        #btnComenzar, #btnFinalizar {
-            margin-top: 20px;
-            padding: 10px 20px;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            transition: background 0.3s;
-        }
+    #btnComenzar, #btnFinalizar, #btnPausa {
+        margin-top: 20px;
+        padding: 10px 20px;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        transition: background 0.3s;
+    }
 
-        #btnComenzar { background-color: #27ae60; }
-        #btnComenzar:hover { background-color: #1e8449; }
+    #btnComenzar { background-color: #27ae60; }
+    #btnComenzar:hover { background-color: #1e8449; }
 
-        #btnFinalizar { background-color: #e74c3c; display:none; }
-        #btnFinalizar:hover { background-color: #c0392b; }
+    #btnFinalizar { background-color: #e74c3c; display:none; }
+    #btnFinalizar:hover { background-color: #c0392b; }
 
-        .contenedor {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            width: 95%;
-            max-width: 900px;
-            margin-top: 20px;
-        }
+    #btnPausa { background-color: #f1c40f; display:none; color:#333; }
+    #btnPausa:hover { background-color: #d4ac0d; }
 
-        .zona {
-            flex: 1;
-            min-width: 280px;
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
+    .contenedor {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 95%;
+        max-width: 900px;
+        margin-top: 20px;
+    }
 
-        .zona h3 {
-            text-align: center;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
+    .zona {
+        flex: 1;
+        min-width: 280px;
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+    }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    .zona h3 {
+        text-align: center;
+        margin-bottom: 10px;
+        color: #2c3e50;
+    }
 
-        li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 10px;
-            border-bottom: 1px solid #eee;
-        }
+    ul { list-style: none; padding: 0; margin: 0; }
 
-        li:last-child { border-bottom: none; }
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 10px;
+        border-bottom: 1px solid #eee;
+    }
 
-        .btn-cambio {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: background 0.3s;
-        }
+    li:last-child { border-bottom: none; }
 
-        .btn-cambio:hover { background-color: #0056b3; }
+    .btn-cambio {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: background 0.3s;
+    }
 
-        /* Iconos de cambio */
-        .icono-cambio {
-            margin-left: 8px;
-            font-size: 16px;
-        }
-        .icono-verde { color: #27ae60; }
-        .icono-rojo { color: #e74c3c; }
+    .btn-cambio:hover { background-color: #0056b3; }
 
-        /* Efecto de resaltar suplentes */
-        .zona.resaltada {
-            box-shadow: 0 0 15px 3px #3498db;
-            transform: scale(1.02);
-        }
+    .icono-cambio {
+        margin-left: 8px;
+        font-size: 16px;
+    }
+    .icono-verde { color: #27ae60; }
+    .icono-rojo { color: #e74c3c; }
 
-        /* Mensaje flotante */
-        #mensajeCambio {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #3498db;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 20px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-            font-size: 15px;
-            display: none;
-            z-index: 1000;
-        }
+    .zona.resaltada {
+        box-shadow: 0 0 15px 3px #3498db;
+        transform: scale(1.02);
+    }
 
-        /* Reloj */
-        #reloj {
-            background-color: #2c3e50;
-            color: white;
-            font-size: 18px;
-            padding: 8px 20px;
-            border-radius: 20px;
-            margin-top: 15px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            display: none;
-        }
+    #mensajeCambio {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #3498db;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 20px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        font-size: 15px;
+        display: none;
+        z-index: 1000;
+    }
 
-        /* Mensaje de error */
-        #mensajeError {
-            margin-top: 10px;
-            color: #e74c3c;
-            font-weight: 600;
-            display: none;
-            text-align: center;
-        }
+    #reloj {
+        background-color: #2c3e50;
+        color: white;
+        font-size: 18px;
+        padding: 8px 20px;
+        border-radius: 20px;
+        margin-top: 15px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        display: none;
+    }
 
-        @media (max-width: 600px) {
-            .contenedor {
-                flex-direction: column;
-                align-items: center;
-            }
-            .zona {
-                width: 90%;
-            }
-        }
-    </style>
+    #mensajeError {
+        margin-top: 10px;
+        color: #e74c3c;
+        font-weight: 600;
+        display: none;
+        text-align: center;
+    }
+</style>
 </head>
 <body>
 
@@ -213,15 +197,17 @@ if ($resultado->num_rows > 0) {
 <button id="btnComenzar" style="display:none;">Comenzar</button>
 
 <div id="reloj"></div>
+<button id="btnPausa">⏸️ Pausar</button>
+
 <h4 id="datospartido">
-    <?php 
-    $sql = "SELECT rival FROM partidos WHERE id = $id_partido";
-    $resultado = $conexion->query($sql);
-    if ($resultado->num_rows > 0) {
-        $fila = $resultado->fetch_assoc();
-        echo "Rival: " . htmlspecialchars($fila["rival"]);
-    }
-    ?>
+<?php 
+$sql = "SELECT rival FROM partidos WHERE id = $id_partido";
+$resultado = $conexion->query($sql);
+if ($resultado->num_rows > 0) {
+    $fila = $resultado->fetch_assoc();
+    echo "Rival: " . htmlspecialchars($fila["rival"]);
+}
+?>
 </h4>
 <button id="btnFinalizar">Finalizar Partido</button>
 
@@ -243,6 +229,7 @@ const idPartido = <?php echo intval($id_partido); ?>;
 const checkboxes = document.querySelectorAll('.checkTitular');
 const btnComenzar = document.getElementById('btnComenzar');
 const btnFinalizar = document.getElementById('btnFinalizar');
+const btnPausa = document.getElementById('btnPausa');
 const listaJugadoras = document.getElementById('listaJugadoras');
 const resultado = document.getElementById('resultado');
 const listaTitulares = document.getElementById('listaTitulares');
@@ -256,13 +243,16 @@ let titulares = [];
 let suplentes = [];
 let titularSeleccionado = null;
 let tiempoInicio = null;
+let pausado = false;
+let tiempoPausaInicio = null; // 🔧 cuándo empezó la pausa
+let totalTiempoPausado = 0;   // 🔧 cuánto tiempo total ha estado en pausa
 let intervaloReloj = null;
 let partidoActivo = false;
 
-let jugadorasData = {}; // Guardará datos de tiempos por jugadora
+let jugadorasData = {};
 
 // -----------------------------
-// SELECCION DE TITULARES
+// SELECCIÓN TITULARES
 // -----------------------------
 checkboxes.forEach(chk => {
     chk.addEventListener('change', () => {
@@ -286,6 +276,7 @@ btnComenzar.addEventListener('click', () => {
     resultado.style.display = 'flex';
     reloj.style.display = 'block';
     btnFinalizar.style.display = 'block';
+    btnPausa.style.display = 'inline-block';
     partidoActivo = true;
 
     titulares = [];
@@ -307,6 +298,46 @@ btnComenzar.addEventListener('click', () => {
 });
 
 // -----------------------------
+// PAUSAR / REANUDAR
+// -----------------------------
+btnPausa.addEventListener('click', () => {
+    if (!pausado) {
+        // 🔧 PAUSAR
+        clearInterval(intervaloReloj);
+        pausado = true;
+        tiempoPausaInicio = Date.now(); // 🔧 marcar inicio de pausa
+        btnPausa.textContent = "▶️ Reanudar";
+
+        // Guardar tiempos hasta este momento
+        for (let id in jugadorasData) {
+            const j = jugadorasData[id];
+            if (j.jugando && j.tiempoEntrada) {
+                j.tiempoAcumulado += Date.now() - j.tiempoEntrada;
+                j.tiempoEntrada = null;
+            }
+        }
+        mostrarMensaje("Cronómetro en pausa ⏸️");
+    } else {
+        // 🔧 REANUDAR
+        pausado = false;
+        const duracionPausa = Date.now() - tiempoPausaInicio;
+        totalTiempoPausado += duracionPausa;
+        tiempoPausaInicio = null;
+        iniciarReloj();
+        btnPausa.textContent = "⏸️ Pausar";
+
+        // Reanudar tiempo jugadoras activas
+        for (let id in jugadorasData) {
+            const j = jugadorasData[id];
+            if (j.jugando && !j.tiempoEntrada) {
+                j.tiempoEntrada = Date.now();
+            }
+        }
+        mostrarMensaje("Cronómetro reanudado ▶️");
+    }
+});
+
+// -----------------------------
 // FINALIZAR PARTIDO
 // -----------------------------
 btnFinalizar.addEventListener('click', async () => {
@@ -315,14 +346,13 @@ btnFinalizar.addEventListener('click', async () => {
     partidoActivo = false;
     document.querySelectorAll('.btn-cambio').forEach(btn => btn.disabled = true);
 
-    // Guardar minutos finales de todas las que estén jugando
     for (let id in jugadorasData) {
         const j = jugadorasData[id];
+        let minutos = Math.floor(j.tiempoAcumulado / 60000);
         if (j.jugando && j.tiempoEntrada) {
-            const minutos = Math.floor((Date.now() - j.tiempoEntrada) / 60000);
-            await guardarMinutos(id, minutos);
-            j.jugando = false;
+            minutos += Math.floor((Date.now() - j.tiempoEntrada) / 60000);
         }
+        await guardarMinutos(id, minutos);
     }
     mostrarMensaje('Partido finalizado y minutos guardados ✅');
 });
@@ -350,8 +380,10 @@ async function cambiarSuplente(nombreSuplente) {
         t.cambios.push('sale');
         const jugOut = jugadorasData[t.id];
         if (jugOut.jugando && jugOut.tiempoEntrada) {
-            const minutos = Math.floor((Date.now() - jugOut.tiempoEntrada) / 60000);
-            await guardarMinutos(t.id, minutos);
+            // 🔧 Si el reloj está pausado, no sumar tiempo adicional
+            if (!pausado) {
+                jugOut.tiempoAcumulado += Date.now() - jugOut.tiempoEntrada;
+            }
             jugOut.jugando = false;
             jugOut.tiempoEntrada = null;
         }
@@ -360,9 +392,9 @@ async function cambiarSuplente(nombreSuplente) {
         s.cambios.push('entra');
         const jugIn = jugadorasData[s.id];
         jugIn.jugando = true;
-        jugIn.tiempoEntrada = Date.now();
+        // 🔧 Si está pausado, no registrar entrada aún
+        jugIn.tiempoEntrada = pausado ? null : Date.now();
 
-        // Actualizar arrays
         titulares = titulares.filter(j => j.nombre !== titularSeleccionado);
         suplentes = suplentes.filter(j => j.nombre !== nombreSuplente);
         titulares.push(s);
@@ -409,13 +441,13 @@ function renderListas() {
 }
 
 function iniciarReloj() {
-    tiempoInicio = new Date();
+    if (!tiempoInicio) tiempoInicio = new Date();
     intervaloReloj = setInterval(actualizarReloj, 1000);
 }
 
 function actualizarReloj() {
     const ahora = new Date();
-    const segundosTotales = Math.floor((ahora - tiempoInicio) / 1000);
+    const segundosTotales = Math.floor((ahora - tiempoInicio - totalTiempoPausado) / 1000); // 🔧 corregido
     const minutos = Math.floor(segundosTotales / 60);
     const segundos = segundosTotales % 60;
     reloj.textContent = `⏱ ${minutos.toString().padStart(2,'0')}:${segundos.toString().padStart(2,'0')}`;
@@ -444,8 +476,10 @@ function mostrarError(texto) {
     setTimeout(() => mensajeError.style.display = 'none', 3000);
 }
 </script>
- <div class="volver">
-        <a href="index.php" class="btn btn-primary">Volver</a>
-    </div>
+
+
+<div class="volver">
+    <a href="index.php" class="btn btn-primary">Volver</a>
+</div>
 </body>
 </html>
